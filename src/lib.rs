@@ -12,19 +12,20 @@ pub fn run<R1: Display, R2: Display>(
 ) {
   let test = matches!(env::args().nth(1).as_deref(), Some("test"));
 
-  if test {
-    println!("DAY {day} TEST DATA ANSWERS:")
-  } else {
-    println!("DAY {day} ANSWERS:")
-  }
-  let now = Instant::now();
+  println!(
+    "DAY {day}{}ANSWERS:",
+    if test { " TEST DATA " } else { " " }
+  );
 
-  let input = load_file(format!(
+  let path = format!(
     "{}inputs/day{:0>2}.txt",
     if test { "test_" } else { "" },
     day
-  ));
+  );
 
+  let now = Instant::now();
+
+  let input = load_file(path);
   println!("Part 1: {}", part_1(&input));
   println!("Part 2: {}", part_2(&input));
 
