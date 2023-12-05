@@ -1,6 +1,9 @@
 run day:
     cargo run --bin "day$(printf "%02d" {{day}})"
 
+run_fast day:
+    cargo run --release --bin "day$(printf "%02d" {{day}})"
+
 run_test day:
     cargo run --bin "day$(printf "%02d" {{day}})" -- test
 
