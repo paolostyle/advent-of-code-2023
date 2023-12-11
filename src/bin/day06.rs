@@ -1,4 +1,5 @@
 use itertools::Itertools;
+use std::string::ToString;
 
 fn get_times_and_distances(input: &[String]) -> (Vec<u64>, Vec<u64>) {
   input
@@ -7,7 +8,7 @@ fn get_times_and_distances(input: &[String]) -> (Vec<u64>, Vec<u64>) {
       line
         .split_whitespace()
         .skip(1)
-        .flat_map(|time| time.parse())
+        .flat_map(str::parse)
         .collect()
     })
     .collect_tuple()
@@ -30,9 +31,9 @@ fn calculate_ways_to_win(time: u64, distance: u64) -> u64 {
 fn concat_numbers(numbers: &[u64]) -> u64 {
   numbers
     .iter()
-    .map(|val| val.to_string())
+    .map(ToString::to_string)
     .join("")
-    .parse::<u64>()
+    .parse()
     .unwrap()
 }
 
@@ -55,5 +56,5 @@ fn part_2(input: &[String]) -> u64 {
 }
 
 fn main() {
-  aoc2023::run(6, part_1, part_2)
+  aoc2023::run(6, part_1, part_2);
 }

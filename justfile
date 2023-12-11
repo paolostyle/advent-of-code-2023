@@ -31,6 +31,6 @@ _template day:
     }
 
     fn main() {
-      aoc2023::run({{day}}, part_1, part_2)
+      aoc2023::run({{day}}, part_1, part_2);
     }
     EOF

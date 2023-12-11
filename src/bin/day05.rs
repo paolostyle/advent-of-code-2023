@@ -15,7 +15,7 @@ fn parse_input(input: &[String]) -> (Vec<u64>, AlmanacMap) {
     .nth(1)
     .expect("splitting failed")
     .split_whitespace()
-    .flat_map(|num| num.parse::<u64>())
+    .flat_map(str::parse)
     .collect();
 
   iter.next();
@@ -48,10 +48,8 @@ fn parse_input(input: &[String]) -> (Vec<u64>, AlmanacMap) {
       group.clear();
     } else if line.contains("map") {
       current_group = line.split_whitespace().next();
-    } else if let Some((destination, source, range)) = line
-      .split_whitespace()
-      .flat_map(|num| num.parse::<u64>())
-      .collect_tuple()
+    } else if let Some((destination, source, range)) =
+      line.split_whitespace().flat_map(str::parse).collect_tuple()
     {
       group.push((destination, source, range));
     }
@@ -85,25 +83,24 @@ fn part_1(input: &[String]) -> u64 {
     .unwrap()
 }
 
-fn part_2(input: &[String]) -> u32 {
-  let (seeds, mappers) = parse_input(input);
+fn part_2(_input: &[String]) -> u32 {
+  todo!();
+  // let (seeds, mappers) = parse_input(input);
 
-  let (starts, lengths): (Vec<_>, Vec<_>) = seeds
-    .into_iter()
-    .enumerate()
-    .partition(|(idx, _)| idx % 2 == 0);
+  // let (starts, lengths): (Vec<_>, Vec<_>) = seeds
+  //   .into_iter()
+  //   .enumerate()
+  //   .partition(|(idx, _)| idx % 2 == 0);
 
-  let pairs: Vec<(u64, u64)> = starts
-    .into_iter()
-    .map(|(_, seed_start)| seed_start)
-    .zip(lengths.into_iter().map(|(_, length)| length))
-    .collect();
+  // let pairs: Vec<(u64, u64)> = starts
+  //   .into_iter()
+  //   .map(|(_, seed_start)| seed_start)
+  //   .zip(lengths.into_iter().map(|(_, length)| length))
+  //   .collect();
 
-  dbg!(pairs);
-
-  0
+  // dbg!(pairs);
 }
 
 fn main() {
-  aoc2023::run(5, part_1, part_2)
+  aoc2023::run(5, part_1, part_2);
 }

@@ -7,14 +7,14 @@ fn parse_scratchcard(scratchcard: &str) -> usize {
     .nth(1)
     .expect("splitting error")
     .split_whitespace()
-    .flat_map(|num| num.parse::<u32>())
+    .flat_map(str::parse)
     .collect();
 
   let winning_numbers: HashSet<u32> = parts
     .next()
     .expect("splitting error")
     .split_whitespace()
-    .flat_map(|num| num.parse::<u32>())
+    .flat_map(str::parse)
     .collect();
 
   winning_numbers.intersection(&owned_numbers).count()
@@ -26,7 +26,7 @@ fn part_1(input: &[String]) -> usize {
     let matches = parse_scratchcard(scratchcard);
     let points = match matches {
       0 => 0,
-      val => 2_usize.pow((val - 1) as u32),
+      val => 2_usize.pow(u32::try_from(val - 1).unwrap()),
     };
     sum += points;
   }
@@ -53,5 +53,5 @@ fn part_2(input: &[String]) -> u32 {
 }
 
 fn main() {
-  aoc2023::run(4, part_1, part_2)
+  aoc2023::run(4, part_1, part_2);
 }

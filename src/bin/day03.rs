@@ -31,7 +31,7 @@ impl Number {
   }
 
   fn get_gear_coord(&self, gears: &HashMap<Coord, char>) -> Option<Coord> {
-    for boundary in self.boundaries.iter() {
+    for boundary in &self.boundaries {
       if gears.contains_key(boundary) {
         return Some(*boundary);
       }
@@ -41,10 +41,10 @@ impl Number {
   }
 
   fn _generate_boundaries(coord: &Coord, width: usize, map_size: (usize, usize)) -> HashSet<Coord> {
-    let has_top = (coord.0 > 0) as usize;
-    let has_bot = (coord.0 < map_size.0 - 1) as usize;
-    let has_left = (coord.1 > 0) as usize;
-    let has_right = (coord.1 < map_size.1 - 1) as usize;
+    let has_top = usize::from(coord.0 > 0);
+    let has_bot = usize::from(coord.0 < map_size.0 - 1);
+    let has_left = usize::from(coord.1 > 0);
+    let has_right = usize::from(coord.1 < map_size.1 - 1);
 
     let mut coords_to_check: HashSet<Coord> = ((coord.0 - has_top)..=(coord.0 + has_bot))
       .cartesian_product((coord.1 - has_left)..(coord.1 + width + has_right))
@@ -71,7 +71,7 @@ fn parse(input: &[String]) -> (Vec<Number>, HashMap<Coord, char>) {
     let mut num_start: Option<usize> = None;
     for (c_idx, c) in line.char_indices() {
       if c.is_ascii_digit() && num_start.is_none() {
-        num_start = Some(c_idx)
+        num_start = Some(c_idx);
       }
       if !c.is_ascii_digit() && c != '.' {
         symbols.insert(Coord(line_idx, c_idx), c);
@@ -136,5 +136,5 @@ fn part_2(input: &[String]) -> u32 {
 }
 
 fn main() {
-  aoc2023::run(3, part_1, part_2)
+  aoc2023::run(3, part_1, part_2);
 }

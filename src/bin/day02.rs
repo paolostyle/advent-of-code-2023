@@ -1,6 +1,6 @@
 use std::cmp::max;
 
-#[derive(Debug)]
+#[derive(Debug, Copy, Clone)]
 struct Set(u32, u32, u32);
 
 #[derive(Debug)]
@@ -23,7 +23,7 @@ impl Game {
             (Ok(count), "red") => set.0 = count,
             (Ok(count), "green") => set.1 = count,
             (Ok(count), "blue") => set.2 = count,
-            _ => panic!("parsing went wrong, {:?}", cube_info),
+            _ => panic!("parsing went wrong, {cube_info:?}"),
           }
         });
         sets.push(set);
@@ -86,5 +86,5 @@ fn part_2(input: &[String]) -> u32 {
 }
 
 fn main() {
-  aoc2023::run(2, part_1, part_2)
+  aoc2023::run(2, part_1, part_2);
 }

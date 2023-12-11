@@ -70,5 +70,5 @@ fn part_2(input: &[String]) -> u32 {
 }
 
 fn main() {
-  aoc2023::run(1, part_1, part_2)
+  aoc2023::run(1, part_1, part_2);
 }

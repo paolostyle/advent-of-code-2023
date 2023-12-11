@@ -17,11 +17,7 @@ pub fn run<R1: Display, R2: Display>(
     if test { " TEST DATA " } else { " " }
   );
 
-  let path = format!(
-    "{}inputs/day{:0>2}.txt",
-    if test { "test_" } else { "" },
-    day
-  );
+  let path = format!("{}inputs/day{day:0>2}.txt", if test { "test_" } else { "" });
 
   let now = Instant::now();
 
@@ -30,5 +26,5 @@ pub fn run<R1: Display, R2: Display>(
   println!("Part 2: {}", part_2(&input));
 
   let time = now.elapsed();
-  println!("Execution time: {:.2?}", time);
+  println!("Execution time: {time:.2?}");
 }

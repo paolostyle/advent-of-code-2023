@@ -111,5 +111,5 @@ fn total_winnings<const T: bool>(input: &[String]) -> u64 {
 }
 
 fn main() {
-  aoc2023::run(7, total_winnings::<false>, total_winnings::<true>)
+  aoc2023::run(7, total_winnings::<false>, total_winnings::<true>);
 }
