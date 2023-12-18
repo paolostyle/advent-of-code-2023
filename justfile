@@ -7,7 +7,10 @@ run_fast day:
 run_test day:
     cargo run --bin "day$(printf "%02d" {{day}})" -- test
 
-create day: (_get_input day) (_create_test_input day) (_template day)
+create day: _create_dirs (_get_input day) (_create_test_input day) (_template day)
+
+_create_dirs:
+  mkdir -p inputs test_inputs
 
 _get_input day:
     curl "https://adventofcode.com/2023/day/{{day}}/input" \
@@ -15,7 +18,6 @@ _get_input day:
         "inputs/day$(printf "%02d" {{day}}).txt"
 
 _create_test_input day:
-    mkdir -p test_inputs
     touch "test_inputs/day$(printf "%02d" {{day}}).txt"
 
 _template day:
